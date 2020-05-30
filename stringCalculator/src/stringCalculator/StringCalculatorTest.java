@@ -7,8 +7,13 @@ import org.junit.jupiter.api.Test;
 class StringCalculatorTest {
 
 	@Test
-	public void shouldReturnZeroOrEmptyString()  {
+	public void shouldReturnZeroOnEmptyString()  {
 		assertEquals(0, StringCalculator.add(""));
+	}
+	
+	@Test
+	public void shouldReturnNumberOnNumber()  {
+		assertEquals(1, StringCalculator.add("1"));
 	}
 
 }
