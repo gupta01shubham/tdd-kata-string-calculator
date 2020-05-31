@@ -50,5 +50,16 @@ class StringCalculatorTest {
 			//OK
 		}
 	}
+	
+	@Test
+	public void exceptionMessageShouldContainTheNegativeNumber() {
+		try {
+			StringCalculator.add("-1,2,3");
+			fail("Exception expected.");
+		} catch (RuntimeException ex) {
+			assertEquals("Negatives not allowed: -1, -2",ex.getMessage());
+		}
+	}
+	
 
 }

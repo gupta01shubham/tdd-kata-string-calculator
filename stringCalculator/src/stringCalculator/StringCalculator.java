@@ -17,16 +17,22 @@ public class StringCalculator {
 		} else {
 			String[] tokens = tokenize(numbers);
 			List<Integer> number = convert(tokens, toInt());
-			List<Integer> negatives = filter(lessThan(0),number);
-			if(negatives.size() > 0) {
-				throw new RuntimeException();
-			}
+			ensureAllNonNegatives(number);
 			return sum(number).intValue();
 		}
 	}
 
+	private static void ensureAllNonNegatives(List<Integer> number) {
+		List<Integer> negatives = filter(lessThan(0), number);
+		if (negatives.size() > 0) {
+			throw new RuntimeException("Negatives not allowed: " + join(negatives));
+		}
+	}
+
 	private static String[] tokenize(String text) {
-		if (usesCustomDelimiterSyntax(text)) {
+		if (text.isEmpty()) {
+			return new String[0];
+		} else if (usesCustomDelimiterSyntax(text)) {
 			return splitUsingCustomDelimiterSyntax(text);
 		} else {
 			return splitUsingNewLinesAndCommas(text);
