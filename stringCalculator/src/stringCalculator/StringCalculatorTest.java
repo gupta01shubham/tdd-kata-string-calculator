@@ -25,7 +25,7 @@ class StringCalculatorTest {
 	public void shouldReturnSumOnMultipleNumbers() {
 		assertEquals(6, StringCalculator.add("1,2,3"));
 	}
-	
+
 	@Test
 	public void shouldAcceptNewLineAsValidDelimiter() {
 		assertEquals(6, StringCalculator.add("1,2\n3"));
@@ -35,4 +35,20 @@ class StringCalculatorTest {
 	public void shouldAcceptCustomDelimiterSyntax() {
 		assertEquals(3, StringCalculator.add("//;\n1;2"));
 	}
+
+	@Test
+	public void customDelimiterCouldAlsoBeARegExpSpecialChar() {
+		assertEquals(3, StringCalculator.add("//.\n1.2"));
+	}
+
+	@Test
+	public void shouldRaiseExceptionOnNegatives() {
+		try {
+			StringCalculator.add("-1,2,3");
+			fail("Exception expected.");
+		} catch (RuntimeException ex) {
+			//OK
+		}
+	}
+
 }

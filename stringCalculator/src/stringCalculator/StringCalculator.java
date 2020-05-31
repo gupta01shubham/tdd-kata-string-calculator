@@ -1,6 +1,7 @@
 package stringCalculator;
 
 import static ch.lambdaj.Lambda.*;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -16,6 +17,10 @@ public class StringCalculator {
 		} else {
 			String[] tokens = tokenize(numbers);
 			List<Integer> number = convert(tokens, toInt());
+			List<Integer> negatives = filter(lessThan(0),number);
+			if(negatives.size() > 0) {
+				throw new RuntimeException();
+			}
 			return sum(number).intValue();
 		}
 	}
@@ -42,7 +47,7 @@ public class StringCalculator {
 		m.matches();
 		String customDelimiter = m.group(1);
 		String numbers = m.group(2);
-		return numbers.split(customDelimiter);
+		return numbers.split(Pattern.quote(customDelimiter));
 	}
 
 	private static Converter<String, Integer> toInt() {
