@@ -12,14 +12,15 @@ import ch.lambdaj.function.convert.Converter;
 public class StringCalculator {
 
 	public static int add(String numbers) {
-		if (numbers.isEmpty()) {
-			return 0;
-		} else {
-			String[] tokens = tokenize(numbers);
-			List<Integer> number = convert(tokens, toInt());
-			ensureAllNonNegatives(number);
-			return sum(number).intValue();
-		}
+		List<Integer> number = parseNumbers(numbers);
+		ensureAllNonNegatives(number);
+		return sum(number).intValue();
+	}
+
+	private static List<Integer> parseNumbers(String numbers) {
+		String[] tokens = tokenize(numbers);
+		List<Integer> number = convert(tokens, toInt());
+		return number;
 	}
 
 	private static void ensureAllNonNegatives(List<Integer> number) {
