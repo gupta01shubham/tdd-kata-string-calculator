@@ -13,19 +13,21 @@ public class StringCalculator {
 			return 0;
 		} else if (numbers.contains(",")) {
 			String[] tokens = numbers.split(",");
-			List<Integer> number = convert(tokens, new Converter<String, Integer>() {
-
-				public Integer convert(String from) {
-					return toInt(from);
-				}
-
-			});
+			List<Integer> number = convert(tokens, toInt());
 
 //			return toInt(tokens[0]) + Integer.parseInt(tokens[1]);
 			return sum(number).intValue();
 		} else {
 			return toInt(numbers);
 		}
+	}
+	
+	private static Converter<String,Integer> toInt(){
+		return new Converter<String, Integer>() {
+			public Integer convert(String from) {
+				return toInt(from);
+			}
+		};
 	}
 
 	private static int toInt(String text) throws NumberFormatException {
