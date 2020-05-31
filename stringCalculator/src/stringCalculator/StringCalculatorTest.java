@@ -31,4 +31,8 @@ class StringCalculatorTest {
 		assertEquals(6, StringCalculator.add("1,2\n3"));
 	}
 
+	@Test
+	public void shouldAcceptCustomDelimiterSyntax() {
+		assertEquals(3, StringCalculator.add("//;\n1;2"));
+	}
 }
